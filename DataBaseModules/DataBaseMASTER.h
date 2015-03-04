@@ -19,10 +19,7 @@ struct Book {
         String ISBN;
         String Title:
         String Author;
-        Date dateAdded;
-        unsigned int quantity;
-        double wholesale;
-        double retail;
+
     
 };
 
@@ -30,10 +27,7 @@ class DataBaseMASTER
 {
     private:
         vector listOfBooks;
-    
-    public:
-        void addBookToList(Book);
-}
+
 
 void addBookToList(Book book2Add)
 {
@@ -43,9 +37,7 @@ void addBookToList(Book book2Add)
 void deleteBookUsingISBN(String ISBN)
 {
     bool foundBook = false;
-    int idx = 0;
-    vector newListOfBooks;
-    while (idx < this->listOfBooks.length)
+th)
     {
         Book compareBook = this->listOfBooks[idx++];
         if (compareBook.ISBN == ISBN)
