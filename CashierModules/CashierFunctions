@@ -38,7 +38,7 @@ void ListBook(int Qty, string ISBN, string Title, double Price, double Total) //
 	
 
 	cout << setprecision(2) << fixed;
-	cout << Qty << "\t" << ISBN << "\t\t\t" << Title << "\t" << Price << "\t" << Total << endl;
+	cout << Qty << "\t" << ISBN << "\t" << Title << setw(29 - Title.size()) << Price << "\t\t" << Total << endl;
 	
 
 
