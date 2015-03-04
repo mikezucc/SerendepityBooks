@@ -1,0 +1,45 @@
+#include <iostream>
+#include <iomanip>
+#include <string> 
+#include "CashierModuleFunctions.h"
+
+using namespace std;
+
+void CategorySetup()		//Set up Categories
+{
+	
+	cout << "\t\tSerendipity Book Sellers:" << endl << endl;
+	cout << "Date: June 10" << endl << endl;
+	cout << "Qty \tISBN \t\t\tTitle \t\t\tPrice \t\tTotal" << endl;
+
+
+}
+
+void ListBook(int Qty, string ISBN, string Title, double Price, double Total) // Display books on screen.
+{
+	int QtyLen = 1;
+	int qty = Qty;
+	double PriceLen = 1;
+	double price = Price;
+	double TotalLen = 1;
+	double total = Total;
+
+	for (QtyLen = 0; price > 0; QtyLen++)		// Get length of Qty
+	{
+		price = price / 10;
+
+	}
+
+	for (PriceLen = 0; qty > 0; PriceLen++)		// Get length of Qty
+	{
+		qty = qty / 10;
+
+	}
+	
+
+	cout << setprecision(2) << fixed;
+	cout << Qty << "\t" << ISBN << "\t\t\t" << Title << "\t" << Price << "\t" << Total << endl;
+	
+
+
+}
