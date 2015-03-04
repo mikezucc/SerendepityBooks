@@ -13,12 +13,6 @@
 
 using namespace std;
 
-struct Aidan {
-    
-public:
-    int swag;
-};
-
 struct Book {
     
     public:
