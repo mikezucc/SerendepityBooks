@@ -1,0 +1,10 @@
+#ifndef CATEGORY_SETUP_INCLUDE
+#define CATEGORY_SETUP_INCLUDE
+#include <string>
+
+using namespace std;
+
+void CategorySetup();
+void ListBook(int , string , string , double , double );
+
+#endif 
