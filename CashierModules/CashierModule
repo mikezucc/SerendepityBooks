@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string> 
+#include "CashierModuleFunctions.h"
+
+
+using namespace std;
+
+int main()  // void CashierModule()
+{
+	
+	CategorySetup();
+
+	int Qty;
+	string ISBN;
+	string Title;
+	double Price;
+	double Total;
+
+	cin >> Qty;
+	cin >> ISBN;
+	cin >> Title;
+	cin >> Price;
+	cin >> Total;
+
+	ListBook(Qty, ISBN, Title, Price, Total); // Display book on screen.
+	
+
+	cin.get();
+
+
+	
+
+}
