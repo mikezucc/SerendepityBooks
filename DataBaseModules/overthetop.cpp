@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <algorithm>
 //#include "Date.h"
 
 using namespace std;
@@ -41,6 +42,7 @@ public:
 	int getAdjustedChar(char);
 	void searchWithString(string);
 	HashTable composeHashForCompare(string);
+	vector <int> matchVectorMatrix;
 };
 
 void DataBaseMASTER::addBookToList(Book book2Add)
@@ -92,39 +94,39 @@ int DataBaseMASTER::getAdjustedChar(char passedChar) {
 		case ('p') :
 			return 10;
 		case ('a') :
-			return 2;
+			return 1;
 		case ('s') :
-			return 3;
+			return 2;
 		case ('d') :
-			return 4;
-		case ('f') :
-			return 5;
-		case ('g') :
-			return 6;
-		case ('h') :
-			return 7;
-		case ('j') :
-			return 8;
-		case ('k') :
-			return 9;
-		case ('l') :
-			return 10;
-		case ('z') :
 			return 3;
-		case ('x') :
+		case ('f') :
 			return 4;
-		case ('c') :
+		case ('g') :
 			return 5;
-		case ('v') :
+		case ('h') :
 			return 6;
-		case ('b') :
+		case ('j') :
 			return 7;
-		case ('n') :
+		case ('k') :
 			return 8;
-		case ('m') :
+		case ('l') :
 			return 9;
+		case ('z') :
+			return 1;
+		case ('x') :
+			return 2;
+		case ('c') :
+			return 3;
+		case ('v') :
+			return 4;
+		case ('b') :
+			return 5;
+		case ('n') :
+			return 6;
+		case ('m') :
+			return 7;
 		case (',') :
-			return 10;
+			return 8;
 
 
 		case ('Q') :
@@ -148,37 +150,37 @@ int DataBaseMASTER::getAdjustedChar(char passedChar) {
 		case ('P') :
 			return 10;
 		case ('A') :
-			return 2;
+			return 1;
 		case ('S') :
-			return 3;
+			return 2;
 		case ('D') :
-			return 4;
-		case ('F') :
-			return 5;
-		case ('G') :
-			return 6;
-		case ('H') :
-			return 7;
-		case ('J') :
-			return 8;
-		case ('K') :
-			return 9;
-		case ('L') :
-			return 10;
-		case ('Z') :
 			return 3;
-		case ('X') :
+		case ('F') :
 			return 4;
-		case ('C') :
+		case ('G') :
 			return 5;
-		case ('V') :
+		case ('H') :
 			return 6;
-		case ('B') :
+		case ('J') :
 			return 7;
-		case ('N') :
+		case ('K') :
 			return 8;
-		case ('M') :
+		case ('L') :
 			return 9;
+		case ('Z') :
+			return 1;
+		case ('X') :
+			return 2;
+		case ('C') :
+			return 3;
+		case ('V') :
+			return 4;
+		case ('B') :
+			return 5;
+		case ('N') :
+			return 6;
+		case ('M') :
+			return 7;
 
 		default :
 			return 100;
@@ -231,18 +233,75 @@ void DataBaseMASTER::searchWithString(string searchQuery)
 	for (int i = 0; i < DBHashTable.size(); i++)
 	{
 		HashTable hashT = DBHashTable[i];
-		int deltaSum = 0;
+		string stringBase = listOfBooks[i].Title;
+		int deltaSum = 0, charMatcher = 0, charMatcherBase = 0, charMatcherCompare = 0;
 		for (int k = 0;( k < searchHashT.hashTableSize) && (k < hashT.hashTableSize); k++)
 		{
+			char charComp = getAdjustedChar(searchQuery.at(k));
+			char charBase = getAdjustedChar(stringBase.at(k));
+			charMatcherBase += (int)charBase;
+			charMatcherCompare += (int)charComp;
 			int hashTHashSearch = searchHashT.hashList[k];
 			int hashTHashBase = hashT.hashList[k];
-			cout << "hashTHashSearch is: " << hashTHashSearch << endl;
-			cout << "hashTHashBase is: " << hashTHashBase << endl;
+			//cout << "\thashTHashSearch is: " << charComp << endl;
+			//cout << "\thashTHashBase is: " << charBase << endl;
 			deltaSum += abs((double)(hashTHashSearch - hashTHashBase));
 		}
-		cout << "Delta sum for base: " << listOfBooks[i].Title << ", is " << deltaSum << endl;
-		deltaList.push_back(deltaSum);
+		charMatcher = abs((double)(charMatcherBase - charMatcherCompare));
+		//cout << "\t\tDelta sum for base: " << listOfBooks[i].Title << ", is " << deltaSum << endl;
+		//cout << "\t\tChar matcher sum for base: " << listOfBooks[i].Title << ", is " << (int)charMatcher << endl;
+		deltaList.push_back(deltaSum*charMatcher);
 	}
+
+	vector <int> deltaCopy;
+	vector <string> listSortForSearch;
+	for (int i = 0; i < deltaList.size(); i++)
+	{
+		int base = deltaList[i];
+		string baseTitle = listOfBooks[i].Title;
+		vector <int> temp;
+		vector <string> tempTitle;
+		if (deltaCopy.size() == 0)
+		{
+			deltaCopy.push_back(base);
+			listSortForSearch.push_back(baseTitle);
+			//cout << "Appending B: " << base << endl;
+		}
+		else
+		{
+			bool gradient = true;
+			//cout << endl;
+			for (int k = 0; k < deltaCopy.size(); k++)
+			{
+				//cout << "for k: " << k << endl;
+				int compare = deltaCopy[k];
+				string compareTitle = listSortForSearch[k];
+				if (compare >= base && gradient)
+				{
+					temp.push_back(base);
+					tempTitle.push_back(baseTitle);
+					gradient = false;
+					//cout << "Appending B: " << base << endl;
+				}
+				//cout << "Appending C: " << compare << endl;
+				temp.push_back(compare);
+				tempTitle.push_back(compareTitle);
+			}
+			if (gradient)
+			{
+				temp.push_back(base);
+				tempTitle.push_back(baseTitle);
+			}
+			deltaCopy = temp;
+			listSortForSearch = tempTitle;
+		}
+	}
+	for (int k = 0; k < deltaCopy.size(); k++)
+	{
+		//cout << "ORDERED DELTA COPY >> " << deltaCopy[k] << endl;
+		cout << "ORDERED DELTA COPY TITLE >> " << listSortForSearch[k] << ", with relScore: " << deltaCopy[k] << endl;
+	}
+	cout << endl;
 }
 
 int main()
