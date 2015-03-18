@@ -1,6 +1,3 @@
-#include <iostream>
-#include <iomanip>
-#include <string> 
 #include "CashierModuleFunctions.h"
 
 using namespace std;
@@ -18,11 +15,12 @@ void CategorySetup()		//Set up Categories
 
 }																	
 
-void ListBook(int Qty, string ISBN, string Title, double Price, double Total) // Display books on screen.
+void ListBook(Book book) // Display books on screen.
 {
-
+	static int Total;
 	double PriceLen = 1;		// Variables for Lenght of Price
-	double price = Price;
+	double price = book.RetailPrice;
+	Total = Total + book.RetailPrice;
 
 	for (PriceLen = 0; price > 9; PriceLen++)		// Get length of price
 	{
@@ -33,7 +31,7 @@ void ListBook(int Qty, string ISBN, string Title, double Price, double Total) //
 	
 
 	cout << setprecision(2) << fixed;  // set two decimals for cents
-	cout << Qty << "\t" << ISBN << "\t" << Title << setw(29 - Title.size()) << Price << setw(19 - PriceLen) << Total << endl; // Display Book information relevant to Receit
+	cout << book.QuantityOnHand << "\t" << book.ISBN << "\t" << book.Title << setw(29 - book.Title.size()) << book.RetailPrice << setw(19 - PriceLen) << Total << endl; // Display Book information relevant to Receit
 	
 
 
@@ -82,4 +80,3 @@ int TitleorISBN()
 		return choice;
 
 }
-
