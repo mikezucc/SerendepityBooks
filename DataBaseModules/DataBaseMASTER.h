@@ -1,41 +1,66 @@
-#pragma once
+//
+//  DataBaseMASTER.h
+//  
+//
+//  Created by Michael Zuccarino on 2/26/15.
+//
+//
+
+#ifndef ____DataBaseMASTER__
+#define ____DataBaseMASTER__
+
 #include <stdio.h>
-#include <vector>
-#include <string>
-#include <iostream>
-#include <algorithm>
-#include "Date.h"
+
 using namespace std;
 
-struct Book
-{
-	string ISBN;
-	string Title;
-	string Author;
-	string Publisher;
-	Date DateAdded = Date(0, 0, 0);
-	unsigned int QuantityOnHand;
-	double WholesaleCost;
-	double RetailPrice;
-};
-
-
-struct HashTable {
-	vector <int> hashList;
-	int hashTableSize;
+struct Book {
+    
+    public:
+        String ISBN;
+        String Title:
+        String Author;
+        Date dateAdded;
+        unsigned int quantity;
+        double wholesale;
+        double retail;
+    
 };
 
 class DataBaseMASTER
 {
-private:
-	vector <Book> listOfBooks;
-	vector <HashTable> DBHashTable;
-public:
-	void addBookToList(Book);
-	void composeHashTable();
-	void deleteBookUsingISBN(string);
-	int getAdjustedChar(char);
-	Book searchWithString(string);
-	HashTable composeHashForCompare(string);
-	vector <int> matchVectorMatrix;
-};
+    private:
+        vector listOfBooks;
+    
+    public:
+        void addBookToList(Book);
+}
+
+void addBookToList(Book book2Add)
+{
+    this->listOfBooks.push_back(Book);
+}
+
+void deleteBookUsingISBN(String ISBN)
+{
+    bool foundBook = false;
+    int idx = 0;
+    vector newListOfBooks;
+    while (idx < this->listOfBooks.length)
+    {
+        Book compareBook = this->listOfBooks[idx++];
+        if (compareBook.ISBN == ISBN)
+        {
+            foundBook = true;
+        }
+        else
+        {
+            newListOfBooks.push_back(compareBook);
+        }
+    }
+    this->listOfBooks = newListOfBooks;
+}
+
+
+
+
+#endif /* defined(____DataBaseMASTER__) */
