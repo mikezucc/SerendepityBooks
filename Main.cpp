@@ -24,6 +24,7 @@ int main()
 			cout << "4. No module [Exit]" << endl;
 			cout << "Your Choice: ";
 			cin >> choice;
+			system("CLS");
 		}
 
 		if (FirstRound == false)
@@ -36,6 +37,8 @@ int main()
 			cout << "4. No module [Exit]" << endl;
 			cout << "Your Choice: ";
 			cin >> choice;
+			system("CLS");
+
 		}
 		FirstRound = false;
 
@@ -81,6 +84,8 @@ int main()
 			cout << "4. No module [Exit]" << endl;
 			cout << "Your Choice: ";
 			cin >> choice;
+			system("CLS");
+
 
 			} while (choice > 4 || choice < 1);
 
